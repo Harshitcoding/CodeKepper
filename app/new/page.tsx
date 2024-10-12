@@ -60,11 +60,11 @@ export default function NewPost() {
       const data = await response.json()
       console.log('Post created:', data)
   
-      // Redirect to the post page or posts list
+      
       router.push('/dashboard')
     } catch (error) {
       console.error('Error creating post:', error)
-      // Handle error (e.g., show error message to user)
+      
     } finally {
       setIsSubmitting(false)
     }
