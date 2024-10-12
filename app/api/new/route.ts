@@ -11,14 +11,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
 
-    // Fetch user details from Clerk
     const clerkUser = await clerkClient.users.getUser(userId);
     const username = clerkUser.primaryEmailAddress?.emailAddress
     const imageUrl = clerkUser.imageUrl;
 
     const { heading, code, language, tags } = await req.json();
 
-    // Create or update the user
+ 
     const user = await prisma.user.upsert({
       where: { id: userId },
       update: { 
