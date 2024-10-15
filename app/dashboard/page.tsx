@@ -190,7 +190,7 @@ export default function Dashboard() {
               <span className="sr-only">Close</span>
             </Button>
           </DialogHeader>
-          <div className="mt-4 flex flex-col sm:flex-row items-start justify-between gap-4">
+          <div className="mt-4 flex flex-col sm:flex-row items-start justify-center gap-4 ">
             <div className="w-full sm:w-5/6 overflow-x-auto">
               <pre className="border border-gray-200 dark:border-gray-700 rounded-md max-h-[400px] overflow-y-auto">
                 <SyntaxHighlighter language={selectedPost?.language} style={dracula} customStyle={{ margin: 0 }}>
@@ -198,13 +198,7 @@ export default function Dashboard() {
                 </SyntaxHighlighter>
               </pre>
             </div>
-            <Button
-              className="w-full sm:w-auto flex items-center justify-center"
-              onClick={handleCopy}
-            >
-              {copied ? <Check className="h-5 w-5 mr-2" /> : <ClipboardCopy className="h-5 w-5 mr-2" />}
-              {copied ? 'Copied!' : 'Copy'}
-            </Button>
+           
           </div>
           <div className="flex flex-wrap items-center gap-2 mt-4">
             <Badge variant="secondary">{selectedPost?.language}</Badge>
@@ -214,6 +208,8 @@ export default function Dashboard() {
               </Badge>
             ))}
           </div>
+          <Button>{copied ? <Check className="h-5 w-5 mr-2" /> : <ClipboardCopy className="h-5 w-5 mr-2" />}
+          {copied ? 'Copied!' : 'Copy'}</Button>
         </DialogContent>
       </Dialog>
     </div>
