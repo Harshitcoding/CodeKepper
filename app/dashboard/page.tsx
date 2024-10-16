@@ -176,7 +176,7 @@ export default function Dashboard() {
       <Dialog open={!!selectedPost} onOpenChange={closeModal}>
         <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-xl">
+            <DialogTitle className="flex items-center gap-2 text-xl text-black">
               <Code2 className="h-6 w-6" />
               {selectedPost?.heading}
             </DialogTitle>
@@ -186,10 +186,11 @@ export default function Dashboard() {
               className="absolute right-4 top-4"
               onClick={closeModal}
             >
-              <X className="h-4 w-4" />
-              <span className="sr-only">Close</span>
+              <X className="h-4 w-4 bg-slate-500" />
+            
             </Button>
           </DialogHeader>
+          
           <div className="mt-4 flex flex-col sm:flex-row items-start justify-center gap-4 ">
             <div className="w-full sm:w-5/6 overflow-x-auto">
               <pre className="border border-gray-200 dark:border-gray-700 rounded-md max-h-[400px] overflow-y-auto">
