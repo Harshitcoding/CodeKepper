@@ -62,11 +62,15 @@ export default function Dashboard() {
     setCopied(false);
   };
 
-  const handleCopy = () => {
+  const handleCopy = async () => {
     if (selectedPost?.code) {
-      navigator.clipboard.writeText(selectedPost.code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      try {
+        await navigator.clipboard.writeText(selectedPost.code);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch (err) {
+        console.error('Failed to copy: ', err);
+      }
     }
   };
 
@@ -187,10 +191,9 @@ export default function Dashboard() {
               onClick={closeModal}
             >
               <X className="h-4 w-4 bg-slate-500" />
-            
             </Button>
           </DialogHeader>
-          
+
           <div className="mt-4 flex flex-col sm:flex-row items-start justify-center gap-4 ">
             <div className="w-full sm:w-5/6 overflow-x-auto">
               <pre className="border border-gray-200 dark:border-gray-700 rounded-md max-h-[400px] overflow-y-auto">
@@ -198,9 +201,10 @@ export default function Dashboard() {
                   {selectedPost?.code || "No Code"}
                 </SyntaxHighlighter>
               </pre>
-            </div>
-           
+            </div>           
           </div>
+
+          {/* Copy Button */}
           <div className="flex flex-wrap items-center gap-2 mt-4">
             <Badge variant="secondary">{selectedPost?.language}</Badge>
             {selectedPost?.tags.map((tag) => (
@@ -209,8 +213,22 @@ export default function Dashboard() {
               </Badge>
             ))}
           </div>
-          <Button>{copied ? <Check className="h-5 w-5 mr-2" /> : <ClipboardCopy className="h-5 w-5 mr-2" />}
-          {copied ? 'Copied!' : 'Copy'}</Button>
+
+          {/* Updated Copy Button with Functionality */}
+          <Button onClick={handleCopy}>
+            {copied ? (
+              <>
+                <Check className="h-5 w-5 mr-2" />
+                Copied!
+              </>
+            ) : (
+              <>
+                <ClipboardCopy className="h-5 w-5 mr-2" />
+                Copy
+              </>
+            )}
+          </Button>
+
         </DialogContent>
       </Dialog>
     </div>
