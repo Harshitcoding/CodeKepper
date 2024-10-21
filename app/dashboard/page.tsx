@@ -3,15 +3,14 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Code2, ClipboardCopy, Check, X, Trash2 } from 'lucide-react';
+import { Code2, ClipboardCopy, Check,Trash2 } from 'lucide-react';
 import DashboardHeader from '@/components/DashboardHeader';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { motion } from 'framer-motion';
 import Initialpage from '@/components/Initialpage';
+import Loading from '@/components/Loading';
 
 interface Post {
   id: string;
@@ -130,35 +129,18 @@ export default function Dashboard() {
       </header>
       <main className="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
         {loading ? (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {[...Array(6)].map((_, index) => (
-              <Card key={index} className="overflow-hidden bg-black border-gray-800 text-white">
-                <CardHeader className="pb-0">
-                  <Skeleton className="h-6 w-2/3" />
-                </CardHeader>
-                <CardContent className="pb-0">
-                  <Skeleton className="h-24 w-full" />
-                </CardContent>
-                <CardFooter>
-                  <Skeleton className="h-4 w-20" />
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
+         <div>
+         <Loading/>
+         </div>
         ) : posts.length === 0 ? (
           <Initialpage />
         ) : (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+          <div  
             className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
           >
             {posts.map((post) => (
-              <motion.div
+              <div
                 key={post.id}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
               >
                 <Card
                   className="overflow-hidden cursor-pointer hover:shadow-xl hover:bg-gray-750 transition-all duration-300 h-full flex flex-col bg-black border-gray-800 text-white"
@@ -186,9 +168,9 @@ export default function Dashboard() {
                     ))}
                   </CardFooter>
                 </Card>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         )}
       </main>
 
