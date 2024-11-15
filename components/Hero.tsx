@@ -2,11 +2,9 @@
 import animate from "@/assets/lotties/animate.json"
 import Lottie from "lottie-react";
 import Link from "next/link";
-import { BackgroundBeamsWithCollision } from "./ui/background-beams-with-collision";
 
 const Hero = () => {
   return (
-    <BackgroundBeamsWithCollision>
     <div className="flex items-center justify-center min-h-screen px-4">
       <div className="text-center">
         <h1 className="text-3xl md:text-4xl font-bold mb-2">
@@ -22,7 +20,6 @@ const Hero = () => {
         </div>
       </div>
     </div>
-    </BackgroundBeamsWithCollision>
   )
 }
 
